@@ -1,0 +1,73 @@
+﻿<Window x:Name="Mastermind" x:Class="Mastermind.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mastermind"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" KeyDown="Mastermind_KeyDown">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ComboBox x:Name="firstComboBox" Height="25" VerticalAlignment="Top" 
+                  Grid.Row="0" Grid.Column="0" SelectionChanged="ComboBox_Selection">
+            <ComboBoxItem Background="White" Content="Wit"/>
+            <ComboBoxItem Background="Red" Content="Rood"/>
+            <ComboBoxItem Background="Orange" Content="Orange"/>
+            <ComboBoxItem Background="Yellow" Content="Geel"/>
+            <ComboBoxItem Background="Green" Content="Groen"/>
+            <ComboBoxItem Background="Blue" Content="Blauw"/>
+        </ComboBox>
+        <ComboBox x:Name="secondComboBox" Height="25" VerticalAlignment="Top"
+                  Grid.Row="0" Grid.Column="1" SelectionChanged="ComboBox_Selection">
+            <ComboBoxItem Background="White" Content="Wit"/>
+            <ComboBoxItem Background="Red" Content="Rood"/>
+            <ComboBoxItem Background="Orange" Content="Orangje"/>
+            <ComboBoxItem Background="Yellow" Content="Geel"/>
+            <ComboBoxItem Background="Green" Content="Groen"/>
+            <ComboBoxItem Background="Blue" Content="Blauw"/>
+        </ComboBox>
+        <ComboBox x:Name="thirdComboBox"  Height="25" VerticalAlignment="Top"
+                  Grid.Row="0" Grid.Column="2" SelectionChanged="ComboBox_Selection">
+            <ComboBoxItem Background="White" Content="Wit"/>
+            <ComboBoxItem Background="Red" Content="Rood"/>
+            <ComboBoxItem Background="Orange" Content="Orangje"/>
+            <ComboBoxItem Background="Yellow" Content="Geel"/>
+            <ComboBoxItem Background="Green" Content="Groen"/>
+            <ComboBoxItem Background="Blue" Content="Blauw"/>
+        </ComboBox>
+        <ComboBox x:Name="fourthComboBox"  Height="25" VerticalAlignment="Top"
+                  Grid.Row="0" Grid.Column="3"  SelectionChanged="ComboBox_Selection">
+            <ComboBoxItem Background="White" Content="Wit"/>
+            <ComboBoxItem Background="Red" Content="Rood"/>
+            <ComboBoxItem Background="Orange" Content="Orangje"/>
+            <ComboBoxItem Background="Yellow" Content="Geel"/>
+            <ComboBoxItem Background="Green" Content="Groen"/>
+            <ComboBoxItem Background="Blue" Content="Blauw"/>
+        </ComboBox>
+        <Label x:Name="firstColorLabel" Panel.ZIndex="-1"
+               Grid.Row="0" Grid.Column="0"/>
+        <Label x:Name="secondColorLabel" Panel.ZIndex="-1"
+               Grid.Row="0" Grid.Column="1"/>
+        <Label x:Name="thirdColorLabel" Panel.ZIndex="-1"
+               Grid.Row="0" Grid.Column="2"/>
+        <Label x:Name="fourthColorLabel" Panel.ZIndex="-1"
+               Grid.Row="0" Grid.Column="3"/>
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="50" Width="250" Content="Controleer code"
+                Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Click="Button_Click"/>
+        <TextBox x:Name="correctCodeTextBox" Height="20" VerticalAlignment="Bottom"
+                 Grid.Row="1" Grid.Column="0" IsEnabled="False" Visibility="Hidden"/>
+        <TextBox x:Name="timerTextBox" Height="20" VerticalAlignment="Bottom" Width="50" HorizontalAlignment="Left"
+                 Grid.Row="1" Grid.Column="3"/>
+    </Grid>
+</Window>
