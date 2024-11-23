@@ -32,7 +32,7 @@
                   Grid.Row="0" Grid.Column="1" SelectionChanged="ComboBox_Selection">
             <ComboBoxItem Background="White" Content="Wit"/>
             <ComboBoxItem Background="Red" Content="Rood"/>
-            <ComboBoxItem Background="Orange" Content="Orangje"/>
+            <ComboBoxItem Background="Orange" Content="Orange"/>
             <ComboBoxItem Background="Yellow" Content="Geel"/>
             <ComboBoxItem Background="Green" Content="Groen"/>
             <ComboBoxItem Background="Blue" Content="Blauw"/>
@@ -41,7 +41,7 @@
                   Grid.Row="0" Grid.Column="2" SelectionChanged="ComboBox_Selection">
             <ComboBoxItem Background="White" Content="Wit"/>
             <ComboBoxItem Background="Red" Content="Rood"/>
-            <ComboBoxItem Background="Orange" Content="Orangje"/>
+            <ComboBoxItem Background="Orange" Content="Orange"/>
             <ComboBoxItem Background="Yellow" Content="Geel"/>
             <ComboBoxItem Background="Green" Content="Groen"/>
             <ComboBoxItem Background="Blue" Content="Blauw"/>
@@ -50,7 +50,7 @@
                   Grid.Row="0" Grid.Column="3"  SelectionChanged="ComboBox_Selection">
             <ComboBoxItem Background="White" Content="Wit"/>
             <ComboBoxItem Background="Red" Content="Rood"/>
-            <ComboBoxItem Background="Orange" Content="Orangje"/>
+            <ComboBoxItem Background="Orange" Content="Orange"/>
             <ComboBoxItem Background="Yellow" Content="Geel"/>
             <ComboBoxItem Background="Green" Content="Groen"/>
             <ComboBoxItem Background="Blue" Content="Blauw"/>

@@ -130,16 +130,20 @@ namespace Mastermind
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Start_Countdown();
+
             attempts++;
-            Mastermind.Title = $"Pogingen: {attempts}";
+
             string chosenColor1, chosenColor2, chosenColor3, chosenColor4;
             chosenColor1 = firstComboBox.Text;
             chosenColor2 = secondComboBox.Text;
             chosenColor3 = thirdComboBox.Text;
             chosenColor4 = fourthComboBox.Text;
 
-            List<string> chosenColors = new List<string> {chosenColor1, chosenColor2, chosenColor3, chosenColor4 };
-            List<string> correctColors = new List<string> {color1, color2, color3, color4 };
+            List<string> chosenColors = new List<string> { chosenColor1, chosenColor2, chosenColor3, chosenColor4 };
+            List<string> correctColors = new List<string> { color1, color2, color3, color4 };
+
+            WinOrLose(chosenColors, correctColors);
+            Mastermind.Title = $"Pogingen: {attempts}";
 
             for (int i = 0; i < 4; i++)
             {
@@ -279,5 +283,18 @@ namespace Mastermind
             MessageBox.Show("Beurt verloren");
         }
 
+        private void WinOrLose(List<string> chosenColors, List<string> correctColors)
+        {
+            if (chosenColors.SequenceEqual(correctColors))
+            {
+                MessageBox.Show("Gefeliciteerd je hebt de code gekraakt!");
+
+            }
+            else if(attempts > 10)
+            {
+                MessageBox.Show("Helaas u pogingen izjn op verloren.");
+            }
+
+        }
     }
 }
