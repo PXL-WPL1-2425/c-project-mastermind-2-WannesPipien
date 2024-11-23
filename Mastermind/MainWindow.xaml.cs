@@ -142,8 +142,12 @@ namespace Mastermind
             List<string> chosenColors = new List<string> { chosenColor1, chosenColor2, chosenColor3, chosenColor4 };
             List<string> correctColors = new List<string> { color1, color2, color3, color4 };
 
+            ShowAttempt(chosenColors, correctColors);
+
             WinOrLose(chosenColors, correctColors);
             Mastermind.Title = $"Pogingen: {attempts}";
+
+
 
             for (int i = 0; i < 4; i++)
             {
@@ -283,6 +287,60 @@ namespace Mastermind
             MessageBox.Show("Beurt verloren");
         }
 
+        int row = 0;
+        private void ShowAttempt(List<string> chosenColors, List<string> correctColors)
+        {
+            int column = 4;
+            for (int i = 0; i < 4; i++)
+            {
+                Label color = new Label();
+                Grid.SetRow(color, row);
+                Grid.SetColumn(color, column);
+                column++;
+
+                switch (chosenColors[i])
+                {
+                    case "Wit":
+                        color.Background = Brushes.White;
+                            break;
+                    case "Rood":
+                        color.Background = Brushes.Red;
+                        break;
+                    case "Orange":
+                        color.Background = Brushes.Orange;
+                        break;
+                    case "Geel":
+                        color.Background = Brushes.Yellow;
+                        break;
+                    case "Groen":
+                        color.Background = Brushes.Green;
+                        break;
+                    case "Blauw":
+                        color.Background = Brushes.Blue;
+                        break;
+                }
+
+                if (chosenColors[i] == correctColors[i])
+                {
+                    color.BorderBrush = Brushes.DarkRed;
+                    color.BorderThickness = new Thickness(5);
+                }
+                else if (correctColors.Contains(chosenColors[i]))
+                {
+                    color.BorderBrush = Brushes.Wheat;
+                    color.BorderThickness = new Thickness(5);
+                }
+                else
+                {
+                    color.BorderBrush = Brushes.Transparent;
+                    color.BorderThickness = new Thickness(0);
+                }
+
+                mastermindGrid.Children.Add(color);
+            }
+            row++;
+        }
+
         private void WinOrLose(List<string> chosenColors, List<string> correctColors)
         {
             if (chosenColors.SequenceEqual(correctColors))
@@ -292,7 +350,7 @@ namespace Mastermind
             }
             else if(attempts > 10)
             {
-                MessageBox.Show("Helaas u pogingen izjn op verloren.");
+                MessageBox.Show("Helaas u pogingen zijn op en u heeft verloren.");
             }
 
         }

@@ -6,14 +6,24 @@
         xmlns:local="clr-namespace:Mastermind"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" KeyDown="Mastermind_KeyDown">
-    <Grid>
+    <Grid x:Name="mastermindGrid">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -56,18 +66,18 @@
             <ComboBoxItem Background="Blue" Content="Blauw"/>
         </ComboBox>
         <Label x:Name="firstColorLabel" Panel.ZIndex="-1"
-               Grid.Row="0" Grid.Column="0"/>
+               Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"/>
         <Label x:Name="secondColorLabel" Panel.ZIndex="-1"
-               Grid.Row="0" Grid.Column="1"/>
+               Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"/>
         <Label x:Name="thirdColorLabel" Panel.ZIndex="-1"
-               Grid.Row="0" Grid.Column="2"/>
+               Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"/>
         <Label x:Name="fourthColorLabel" Panel.ZIndex="-1"
-               Grid.Row="0" Grid.Column="3"/>
+               Grid.Row="0" Grid.Column="3" Grid.RowSpan="2"/>
         <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="50" Width="250" Content="Controleer code"
-                Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Click="Button_Click"/>
+                Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Click="Button_Click"/>
         <TextBox x:Name="correctCodeTextBox" Height="20" VerticalAlignment="Bottom"
-                 Grid.Row="1" Grid.Column="0" IsEnabled="False" Visibility="Hidden"/>
+                 Grid.Row="2" Grid.Column="0" IsEnabled="False" Visibility="Hidden"/>
         <TextBox x:Name="timerTextBox" Height="20" VerticalAlignment="Bottom" Width="50" HorizontalAlignment="Left"
-                 Grid.Row="1" Grid.Column="3"/>
+                 Grid.Row="2" Grid.Column="3"/>
     </Grid>
 </Window>
