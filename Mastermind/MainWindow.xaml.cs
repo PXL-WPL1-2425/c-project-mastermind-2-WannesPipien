@@ -17,6 +17,7 @@ namespace Mastermind
         //Variabelen worden globaal geinitieerd
         private string color1, color2, color3, color4;
         private int attempts = 0;
+        int score = 100;
         public MainWindow()
         {
             InitializeComponent();
@@ -143,7 +144,7 @@ namespace Mastermind
             List<string> correctColors = new List<string> { color1, color2, color3, color4 };
 
             ShowAttempt(chosenColors, correctColors);
-
+            ChangeScore(chosenColors, correctColors);
             WinOrLose(chosenColors, correctColors);
             Mastermind.Title = $"Pogingen: {attempts}";
 
@@ -285,6 +286,7 @@ namespace Mastermind
         {
             timer.Stop();
             MessageBox.Show("Beurt verloren");
+            score -= 8;
         }
 
         int row = 0;
@@ -353,6 +355,27 @@ namespace Mastermind
                 MessageBox.Show("Helaas u pogingen zijn op en u heeft verloren.");
             }
 
+        }
+
+        private void ChangeScore(List<string> chosenColors, List<string> correctColors)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (correctColors[i] == chosenColors[i])
+                {
+                    score -= 0;
+                }
+                else if (correctColors.Contains(chosenColors[i]))
+                {
+                    score--;
+                }
+                else
+                {
+                    score -= 2;
+                }
+            }
+
+            scoreTextBox.Text = score.ToString();
         }
     }
 }
