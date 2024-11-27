@@ -77,9 +77,9 @@
                 Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Click="Button_Click"/>
         <TextBox x:Name="correctCodeTextBox" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left"
                  Grid.Row="2" Grid.Column="0" IsEnabled="False" Visibility="Hidden"/>
-        <TextBox x:Name="scoreTextBox" Height="20" Width="50" VerticalAlignment="Bottom" Text="100" HorizontalAlignment="Left" Margin="5,0,0,0"
+        <TextBox x:Name="scoreTextBox" Height="20" Width="50" VerticalAlignment="Bottom" Text="100" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="False"
                  Grid.Row="2" Grid.Column="3"/>
-        <TextBox x:Name="timerTextBox" Height="20" VerticalAlignment="Top" Width="50" HorizontalAlignment="Left" Margin="5,0,0,0"
+        <TextBox x:Name="timerTextBox" Height="20" VerticalAlignment="Top" Width="50" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="False"
                  Grid.Row="2" Grid.Column="3"/>
     </Grid>
 </Window>

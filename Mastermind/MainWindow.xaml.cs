@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Printing;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -15,17 +16,30 @@ namespace Mastermind
     public partial class MainWindow : Window
     {
         //Variabelen worden globaal geinitieerd
-        private string color1, color2, color3, color4;
-        private int attempts = 0;
+        string color1, color2, color3, color4;
+        int attempts = 0;
         int score = 100;
+        int row = 0;
         public MainWindow()
         {
             InitializeComponent();
+            GameStart();
+        }
 
+        private void GameStart()
+        {
             CodeRandomizer(out color1, out color2, out color3, out color4);
             correctCodeTextBox.Text = $"{color1}, {color2}, {color3}, {color4}";
+            score = 100;
+            attempts = 0;
+            row = 0;
 
-            Mastermind.Title = $"Pogingen: {attempts}";
+
+            RemoveAttemptLabels();
+            ResetChoiceLabels();
+
+            Mastermind.Title = $"Pogingen: 0";
+            scoreTextBox.Text = "100";
         }
 
         private void ComboBox_Selection(object sender, SelectionChangedEventArgs e)
@@ -132,6 +146,7 @@ namespace Mastermind
         {
             Start_Countdown();
 
+
             attempts++;
 
             string chosenColor1, chosenColor2, chosenColor3, chosenColor4;
@@ -142,13 +157,6 @@ namespace Mastermind
 
             List<string> chosenColors = new List<string> { chosenColor1, chosenColor2, chosenColor3, chosenColor4 };
             List<string> correctColors = new List<string> { color1, color2, color3, color4 };
-
-            ShowAttempt(chosenColors, correctColors);
-            ChangeScore(chosenColors, correctColors);
-            WinOrLose(chosenColors, correctColors);
-            Mastermind.Title = $"Pogingen: {attempts}";
-
-
 
             for (int i = 0; i < 4; i++)
             {
@@ -186,6 +194,12 @@ namespace Mastermind
                     targetlabel.BorderThickness = new Thickness(0);
                 }
             }
+
+            ShowAttempt(chosenColors, correctColors);
+            ChangeScore(chosenColors, correctColors);
+            WinOrLose(chosenColors, correctColors);
+
+            Mastermind.Title = $"Pogingen: {attempts}";
         }
         private void CodeRandomizer(out string color1, out string color2, out string color3, out string color4)
         {
@@ -289,76 +303,97 @@ namespace Mastermind
             score -= 8;
         }
 
-        int row = 0;
+        List<Label> colorLabels = new List<Label>();
         private void ShowAttempt(List<string> chosenColors, List<string> correctColors)
         {
             int column = 4;
             for (int i = 0; i < 4; i++)
             {
-                Label color = new Label();
-                Grid.SetRow(color, row);
-                Grid.SetColumn(color, column);
+                Label colorLabel = new Label();
+                Grid.SetRow(colorLabel, row);
+                Grid.SetColumn(colorLabel, column);
+                mastermindGrid.Children.Add(colorLabel);
+                colorLabels.Add(colorLabel);
                 column++;
 
                 switch (chosenColors[i])
                 {
                     case "Wit":
-                        color.Background = Brushes.White;
+                        colorLabel.Background = Brushes.White;
                             break;
                     case "Rood":
-                        color.Background = Brushes.Red;
+                        colorLabel.Background = Brushes.Red;
                         break;
                     case "Orange":
-                        color.Background = Brushes.Orange;
+                        colorLabel.Background = Brushes.Orange;
                         break;
                     case "Geel":
-                        color.Background = Brushes.Yellow;
+                        colorLabel.Background = Brushes.Yellow;
                         break;
                     case "Groen":
-                        color.Background = Brushes.Green;
+                        colorLabel.Background = Brushes.Green;
                         break;
                     case "Blauw":
-                        color.Background = Brushes.Blue;
+                        colorLabel.Background = Brushes.Blue;
                         break;
                 }
 
                 if (chosenColors[i] == correctColors[i])
                 {
-                    color.BorderBrush = Brushes.DarkRed;
-                    color.BorderThickness = new Thickness(5);
+                    colorLabel.BorderBrush = Brushes.DarkRed;
+                    colorLabel.BorderThickness = new Thickness(5);
                 }
                 else if (correctColors.Contains(chosenColors[i]))
                 {
-                    color.BorderBrush = Brushes.Wheat;
-                    color.BorderThickness = new Thickness(5);
+                    colorLabel.BorderBrush = Brushes.Wheat;
+                    colorLabel.BorderThickness = new Thickness(5);
                 }
                 else
                 {
-                    color.BorderBrush = Brushes.Transparent;
-                    color.BorderThickness = new Thickness(0);
+                    colorLabel.BorderBrush = Brushes.Transparent;
+                    colorLabel.BorderThickness = new Thickness(0);
                 }
 
-                mastermindGrid.Children.Add(color);
             }
             row++;
         }
 
         private void WinOrLose(List<string> chosenColors, List<string> correctColors)
         {
+
             if (chosenColors.SequenceEqual(correctColors))
             {
-                MessageBox.Show("Gefeliciteerd je hebt de code gekraakt!");
-
+                MessageBoxResult antwoord = MessageBox.Show($" aantal pogingen: {attempts}!\nWilt u noch eens proberen?","Gewonnen!",MessageBoxButton.YesNo);
+                attempts--;
+                if (antwoord == MessageBoxResult.Yes)
+                {
+                    GameStart();
+                    timer.Stop();
+                }
+                else
+                {
+                    Close();
+                }
             }
             else if(attempts > 10)
             {
-                MessageBox.Show("Helaas u pogingen zijn op en u heeft verloren.");
+                MessageBoxResult antwoord = MessageBox.Show("Helaas u pogingen zijn op.\nWilt u noch eens proberen?","Verloren",MessageBoxButton.YesNo);
+                attempts--;
+                if (antwoord == MessageBoxResult.Yes)
+                {
+                    GameStart();
+                    timer.Stop();
+                }
+                else
+                {
+                    Close();
+                }
             }
-
         }
 
         private void ChangeScore(List<string> chosenColors, List<string> correctColors)
         {
+
             for (int i = 0; i < 4; i++)
             {
                 if (correctColors[i] == chosenColors[i])
@@ -376,6 +411,43 @@ namespace Mastermind
             }
 
             scoreTextBox.Text = score.ToString();
+        }
+
+        private void RemoveAttemptLabels()
+        {
+            foreach(var label in colorLabels)
+            {
+                mastermindGrid.Children.Remove(label);
+            }
+
+            colorLabels.Clear();
+        }
+
+        private void ResetChoiceLabels()
+        {
+            firstComboBox.SelectedIndex = -1;
+            firstComboBox.ClearValue(Control.BackgroundProperty);
+            firstColorLabel.ClearValue(Control.BackgroundProperty); 
+            firstColorLabel.ClearValue(Border.BorderBrushProperty);
+            firstColorLabel.ClearValue(Border.BorderThicknessProperty);
+;
+            secondComboBox.SelectedIndex = -1;
+            secondComboBox.ClearValue(Control.BackgroundProperty);
+            secondColorLabel.ClearValue(Control.BackgroundProperty);
+            secondColorLabel.ClearValue(Border.BorderBrushProperty);
+            secondColorLabel.ClearValue(Border.BorderThicknessProperty);
+
+            thirdComboBox.SelectedIndex = -1;
+            thirdComboBox.ClearValue(Control.BackgroundProperty);
+            thirdColorLabel.ClearValue(Control.BackgroundProperty);
+            thirdColorLabel.ClearValue(Border.BorderBrushProperty);
+            thirdColorLabel.ClearValue(Border.BorderThicknessProperty);
+
+            fourthComboBox.SelectedIndex = -1;
+            fourthComboBox.ClearValue(Control.BackgroundProperty);
+            fourthColorLabel.ClearValue(Control.BackgroundProperty);
+            fourthColorLabel.ClearValue(Border.BorderBrushProperty);
+            fourthColorLabel.ClearValue(Border.BorderThicknessProperty);
         }
     }
 }
