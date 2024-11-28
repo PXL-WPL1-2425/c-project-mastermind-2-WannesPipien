@@ -363,7 +363,7 @@ namespace Mastermind
 
             if (chosenColors.SequenceEqual(correctColors))
             {
-                MessageBoxResult antwoord = MessageBox.Show($" aantal pogingen: {attempts}!\nWilt u noch eens proberen?","Gewonnen!",MessageBoxButton.YesNo);
+                MessageBoxResult antwoord = MessageBox.Show($"Score: {score}\nAantal pogingen: {attempts}!\nWilt u noch eens proberen?","Gewonnen!",MessageBoxButton.YesNo);
                 attempts--;
                 if (antwoord == MessageBoxResult.Yes)
                 {
@@ -373,6 +373,7 @@ namespace Mastermind
                 else
                 {
                     Close();
+                    timer.Stop();
                 }
             }
             else if(attempts > 10)
