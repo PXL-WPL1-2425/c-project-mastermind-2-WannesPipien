@@ -20,12 +20,14 @@ namespace Mastermind
         int attempts = 0;
         int score = 100;
         int row = 0;
+        List<Label> colorLabels = new List<Label>();
+
         public MainWindow()
         {
             InitializeComponent();
             GameStart();
         }
-
+        
         private void GameStart()
         {
             CodeRandomizer(out color1, out color2, out color3, out color4);
@@ -265,7 +267,6 @@ namespace Mastermind
             }
         }
 
-
         //Decclareren van startTimer en initiazeren van timer
         DateTime startTime = DateTime.Now;
         DispatcherTimer timer = new DispatcherTimer();
@@ -303,7 +304,6 @@ namespace Mastermind
             score -= 8;
         }
 
-        List<Label> colorLabels = new List<Label>();
         private void ShowAttempt(List<string> chosenColors, List<string> correctColors)
         {
             int column = 4;
@@ -413,6 +413,16 @@ namespace Mastermind
             scoreTextBox.Text = score.ToString();
         }
 
+        private void Mastermind_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult antwoord = MessageBox.Show("Bent u zeker dat u de aplicatie wilt afsluiten?", "Afsluiten", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+
+            if (antwoord == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+
         private void RemoveAttemptLabels()
         {
             foreach(var label in colorLabels)
@@ -449,5 +459,6 @@ namespace Mastermind
             fourthColorLabel.ClearValue(Border.BorderBrushProperty);
             fourthColorLabel.ClearValue(Border.BorderThicknessProperty);
         }
+
     }
 }
