@@ -158,7 +158,7 @@ namespace Mastermind
             chosenColor4 = fourthComboBox.Text;
 
             List<string> chosenColors = new List<string> { chosenColor1, chosenColor2, chosenColor3, chosenColor4 };
-            List<string> correctColors = new List<string> { color1, color2, color3, color4 };
+            List<string> correctColors = new List<string> { color1, color2, color3, color4};
 
             for (int i = 0; i < 4; i++)
             {
