@@ -34,11 +34,11 @@ namespace MastermindNewLayout_Test
         public MainWindow()
         {
             InitializeComponent();
-            GameStart();
+            GameReset();
         }
         
         List<Label> colorLabels = new List<Label>();
-        private void GameStart()
+        private void GameReset()
         {
             timer.Stop();
             CodeRandomizer(out color1, out color2, out color3, out color4);
@@ -53,7 +53,6 @@ namespace MastermindNewLayout_Test
             this.Title = $"Pogingen: 0";
             scoreTextBox.Text = "100";
             timerTextBox.Text = "0";
-            StartGame();
         }
 
         private void CodeRandomizer(out string color1, out string color2, out string color3, out string color4)
@@ -500,12 +499,9 @@ namespace MastermindNewLayout_Test
                 MessageBoxResult antwoord = MessageBox.Show($"Score: {score}\nAantal pogingen: {attempts}!\nWilt u noch eens proberen?", "Gewonnen!", MessageBoxButton.YesNo);
                 if (antwoord == MessageBoxResult.Yes)
                 {
-                    GameStart();
+                    StartGame();
+                    GameReset();
                     timer.Stop();
-                }
-                else
-                {
-                    Close();
                 }
             }
             else if (attempts > 10)
@@ -513,12 +509,9 @@ namespace MastermindNewLayout_Test
                 MessageBoxResult antwoord = MessageBox.Show("Helaas u pogingen zijn op.\nWilt u noch eens proberen?", "Verloren", MessageBoxButton.YesNo);
                 if (antwoord == MessageBoxResult.Yes)
                 {
-                    GameStart();
+                    StartGame();
+                    GameReset();
                     timer.Stop();
-                }
-                else
-                {
-                    Close();
                 }
             }
         }
@@ -534,6 +527,7 @@ namespace MastermindNewLayout_Test
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            StartGame();
         }
 
         StringBuilder highScore = new StringBuilder();
@@ -578,7 +572,8 @@ namespace MastermindNewLayout_Test
 
         private void newGameMenu_Click(object sender, RoutedEventArgs e)
         {
-            GameStart();
+            StartGame();
+            GameReset();
         }
 
         private void StartGame()
