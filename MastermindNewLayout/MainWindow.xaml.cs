@@ -39,6 +39,7 @@ namespace MastermindNewLayout_Test
         List<Label> colorLabels = new List<Label>();
         private void GameStart()
         {
+            timer.Stop();
             CodeRandomizer(out color1, out color2, out color3, out color4);
             correctCodeTextBox.Text = $"{color1}, {color2}, {color3}, {color4}";
             score = 100;
@@ -342,16 +343,17 @@ namespace MastermindNewLayout_Test
             Start_Countdown();
             attempts++;
 
-            List<string> chosenColors = new List<string> { chosenColor1, chosenColor2, chosenColor3, chosenColor4 };
+
+            List<string> chosenColors = new List<string> { chosenColor1, chosenColor2, chosenColor3, chosenColor4 }; 
             List<string> correctColors = new List<string> { color1, color2, color3, color4 };
+
+            this.Title = $"Poging: {attempts}";
 
             ShowAttempt(chosenColors, correctColors);
             ChangeScore(chosenColors, correctColors);
             WinOrLose(chosenColors, correctColors);
 
-            this.Title = $"Poging: {attempts}";
         }
-
 
         //Deze methode start de countdown met een interval van 1
         private void Start_Countdown()
@@ -385,7 +387,6 @@ namespace MastermindNewLayout_Test
             MessageBox.Show("Beurt verloren");
             score -= 8;
         }
-
         private void ShowAttempt(List<string> chosenColors, List<string> correctColors)
         {
             column = 2;
@@ -495,10 +496,10 @@ namespace MastermindNewLayout_Test
             if (chosenColors.SequenceEqual(correctColors))
             {
                 MessageBoxResult antwoord = MessageBox.Show($"Score: {score}\nAantal pogingen: {attempts}!\nWilt u noch eens proberen?", "Gewonnen!", MessageBoxButton.YesNo);
-                timer.Stop();
                 if (antwoord == MessageBoxResult.Yes)
                 {
                     GameStart();
+                    timer.Stop();
                 }
                 else
                 {
@@ -556,6 +557,22 @@ namespace MastermindNewLayout_Test
             ellipse3.Fill = ellipseColor;
             ellipse4.Fill = ellipseColor;
         }
+
+        private void closeMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void highScoreMenu_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"", "Highscores");
+        }
+
+        private void newGameMenu_Click(object sender, RoutedEventArgs e)
+        {
+            GameStart();
+        }
+
 
     }
 }
