@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Microsoft.VisualBasic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,9 +21,9 @@ namespace MastermindNewLayout_Test
         //Variabelen worden globaal geinitieerd
         string color1, color2, color3, color4;
         string chosenColor1, chosenColor2, chosenColor3, chosenColor4;
-        int attempts;
-        int score;
-        int row;
+        int attempts = 1;
+        int score = 100;
+        int row = 0;
         int column;
         int chosenColor1Index = 0;
         int chosenColor2Index = 0;
@@ -49,9 +50,10 @@ namespace MastermindNewLayout_Test
             RemoveAttemptEllipse();
             ResetChoiseEllipse();
 
-            this.Title = $"Poging: 1";
+            this.Title = $"Pogingen: 0";
             scoreTextBox.Text = "100";
             timerTextBox.Text = "0";
+            StartGame();
         }
 
         private void CodeRandomizer(out string color1, out string color2, out string color3, out string color4)
@@ -530,6 +532,12 @@ namespace MastermindNewLayout_Test
             }
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
+
+        StringBuilder highScore = new StringBuilder();
+
         private void RemoveAttemptEllipse()
         {
             foreach(var ellipse in colorEllipses)
@@ -565,7 +573,7 @@ namespace MastermindNewLayout_Test
 
         private void highScoreMenu_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"", "Highscores");
+            MessageBox.Show($"{highScore}", "Highscores");
         }
 
         private void newGameMenu_Click(object sender, RoutedEventArgs e)
@@ -573,6 +581,16 @@ namespace MastermindNewLayout_Test
             GameStart();
         }
 
+        private void StartGame()
+        {
+            string answer = Interaction.InputBox("Geef u naam: ", "Highscore gefeliciteerd!");
+            while (string.IsNullOrEmpty(answer))
+            {
+                MessageBox.Show("Geef alstublief u naam in!", "Leeg antwoord!");
+                answer = Interaction.InputBox("Geef u naam: ", "Speler naam.");
+            }
 
+            highScore.AppendLine($"{answer} - {attempts} pogingen - {score}.");
+        }
     }
 }

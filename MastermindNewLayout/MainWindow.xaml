@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MastermindNewLayout_Test"
         mc:Ignorable="d"
-        Title="mastermind" Height="450" Width="800" Background="Black" ResizeMode="NoResize" KeyDown="Mastermind_KeyDown" Closing="Window_Closing" >
+        Title="mastermind" Height="450" Width="800" Background="Black" ResizeMode="NoResize" KeyDown="Mastermind_KeyDown" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid x:Name="mastermindGrid">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -89,7 +89,7 @@
                 <MenuItem x:Name="closeMenu" Header="Afsluiten" Click="closeMenu_Click"/>
             </MenuItem>
             <MenuItem x:Name="settingsMenu" Header="Instellingen">
-                <MenuItem x:Name="attemptsAmountmenu" Header="Aantal pogingen" Click="attemptsAmountMenu_Click">
+                <MenuItem x:Name="attemptsAmountmenu" Header="Aantal pogingen">
                     <Slider x:Name="maxAttemptSlider" TickPlacement="BottomRight" TickFrequency="1" Minimum="3" Maximum="20" Width="100" AutoToolTipPlacement="TopLeft"/>
                 </MenuItem>
             </MenuItem>
